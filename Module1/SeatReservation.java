@@ -8,12 +8,6 @@ public class SeatReservation {
         return flightDesignator;
     }
 
-    public void setFlightDesignator(String flightDesignator) {
-        if (flightDesignator == null)
-            throw new IllegalArgumentException("flight designator cannot be null");
-        this.flightDesignator = flightDesignator;
-    }
-
     public void setFlightDesignator(String fd) {
         // Check the number of characters
         int length = fd.length();
