@@ -4,8 +4,8 @@ public class SeatReservation {
     private String firstName;
     private String lastName;
 
-    public String getflightDesignator() {
-        return null;
+    public String getFlightDesignator() {
+        return flightDesignator;
     }
 
     public void setFlightDesignator(String fd) {
