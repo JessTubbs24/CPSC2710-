@@ -20,7 +20,7 @@ public class SeatReservation {
     }
 
     public java.time.LocalDate getFlightDate() {
-        return null;
+        return flightDate;
     }
 
     public void setFlightDate(java.time.LocalDate date) {
@@ -28,7 +28,7 @@ public class SeatReservation {
     }
 
     public String getFirstName() {
-        return null;
+        return firstName;
     }
 
     public void setFirstName(String fn) {
@@ -36,7 +36,7 @@ public class SeatReservation {
     }
 
     public String getLastName() {
-        return null;
+        return lastName;
     }
 
     public void setLastName(String ln) {
