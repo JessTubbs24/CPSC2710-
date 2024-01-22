@@ -62,7 +62,13 @@ public class SeatReservationApplication extends Application {
 
         // Set action for Save button
         saveButton.setOnAction(e -> {
-            // Add your save logic here
+            displayInputValues(
+                    flightDesignatorField.getText(),
+                    flightDateDatePicker.getValue().toString(),
+                    firstNameField.getText(),
+                    lastNameField.getText(),
+                    numberOfPassengersField.getText(),
+                    flyingWithInfantCheckBox.isSelected());
             stage.close();
         });
 
