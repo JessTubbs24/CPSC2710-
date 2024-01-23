@@ -67,7 +67,10 @@ public class SeatReservation {
     }
 
     public boolean isFlyingWithInfant() {
-        return flyingWithInfant;
+        return this.flyingWithInfant;
+    }
+    public void setFlyingWithInfant(boolean input) {
+        this.flyingWithInfant = input;
     }
 
     public void makeFlyingWithInfant() {
