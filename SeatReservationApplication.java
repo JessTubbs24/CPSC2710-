@@ -53,6 +53,9 @@ public class SeatReservationApplication extends Application {
         gridPane.add(numberOfPassengersField, 1, 4);
         gridPane.add(flyingWithInfantCheckBox, 1, 5);
 
+        // Call updateUI to display initial values
+        updateUI();
+
         // Cancel and Save Buttons
         Button cancelButton = new Button("Cancel");
         Button saveButton = new Button("Save");
@@ -91,6 +94,17 @@ public class SeatReservationApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
+    // Set action for flyingWithInfant CheckBox
+    flyingWithInfantCheckBox.setOnAction(e->
+
+    {
+            if (flyingWithInfantCheckBox.isSelected()) {
+                numberOfPassengersField.setText("2");
+            } else {
+                numberOfPassengersField.setText("1");
+            }
+        });
 
     private void updateUI() {
         // Update controls with seatReservation values
