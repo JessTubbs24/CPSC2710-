@@ -1,4 +1,4 @@
-package edu.au.cpsc.module2;
+package edu.au.cpsc.Module2;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import java.time.LocalDate;
 
 import java.io.IOException;
 
@@ -19,7 +20,7 @@ public class SeatReservationApplication extends Application {
     public void start(Stage stage) throws IOException {
         seatReservation = new SeatReservation();
         seatReservation.setFlightDesignator("ABC123");
-        seatReservation.setFlightDate("2024-01-22");
+        seatReservation.setFlightDate(LocalDate.of(2024, 1, 22));
         seatReservation.setFirstName("John");
         seatReservation.setLastName("Doe");
         seatReservation.setNumberOfPassengers(1);
@@ -110,21 +111,24 @@ public class SeatReservationApplication extends Application {
         stage.show();
     }
 
-    // Set action for flyingWithInfant CheckBox
-    flyingWithInfantCheckBox.setOnAction(e->
-
-    {
-            if (flyingWithInfantCheckBox.isSelected()) {
-                numberOfPassengersField.setText("2");
-            } else {
-                numberOfPassengersField.setText("1");
-            }
-        });
+    //// Set action for flyingWithInfant CheckBox
+    // flyingWithInfantCheckBox.setOnAction(new EventHandler<ActionEvent>() {
+    // @Override
+    // public void handle(ActionEvent event) {
+    // if (flyingWithInfantCheckBox.isSelected()) {
+    // numberOfPassengersField.setText("2");
+    // } else {
+    // numberOfPassengersField.setText("1");
+    // }
+    // }
+    // });
 
     private void updateUI() {
         // Update controls with seatReservation values
         flightDesignatorField.setText(seatReservation.getFlightDesignator());
-        flightDateDatePicker.setValue(seatReservation.getFlightDate());
+        // Convert String to LocalDate
+        LocalDate flightDate = LocalDate.parse(seatReservation.getFlightDate());
+        flightDateDatePicker.setValue(flightDate);
         firstNameField.setText(seatReservation.getFirstName());
         lastNameField.setText(seatReservation.getLastName());
         numberOfPassengersField.setText(String.valueOf(seatReservation.getNumberOfPassengers()));
