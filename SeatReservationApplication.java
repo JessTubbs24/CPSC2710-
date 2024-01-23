@@ -84,6 +84,27 @@ public class SeatReservationApplication extends Application {
         stage.show();
     }
 
+    private void updateUI() {
+        // Update controls with seatReservation values
+        flightDesignatorField.setText(seatReservation.getFlightDesignator());
+        flightDateDatePicker.setValue(seatReservation.getFlightDate());
+        firstNameField.setText(seatReservation.getFirstName());
+        lastNameField.setText(seatReservation.getLastName());
+        numberOfPassengersField.setText(String.valueOf(seatReservation.getNumberOfPassengers()));
+        flyingWithInfantCheckBox.setSelected(seatReservation.isFlyingWithInfant());
+    }
+
+    private void displayInputValues(String flightDesignator, String flightDate, String firstName, String lastName,
+            String numberOfPassengers, boolean flyingWithInfant) {
+        // Placeholder logic to display input values
+        System.out.println("Flight Designator: " + flightDesignator);
+        System.out.println("Flight Date: " + flightDate);
+        System.out.println("First Name: " + firstName);
+        System.out.println("Last Name: " + lastName);
+        System.out.println("Number of Passengers: " + numberOfPassengers);
+        System.out.println("Flying with Infant: " + flyingWithInfant);
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
