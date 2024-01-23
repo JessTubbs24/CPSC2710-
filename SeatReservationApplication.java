@@ -75,14 +75,29 @@ public class SeatReservationApplication extends Application {
 
         // Set action for Save button
         saveButton.setOnAction(e -> {
-            displayInputValues(
-                    flightDesignatorField.getText(),
-                    flightDateDatePicker.getValue().toString(),
-                    firstNameField.getText(),
-                    lastNameField.getText(),
-                    numberOfPassengersField.getText(),
-                    flyingWithInfantCheckBox.isSelected());
-            stage.close();
+            try {
+                // Populate seatReservation instance variable
+                seatReservation.setFlightDesignator(flightDesignatorField.getText());
+                seatReservation.setFlightDate(flightDateDatePicker.getValue().toString());
+                seatReservation.setFirstName(firstNameField.getText());
+                seatReservation.setLastName(lastNameField.getText());
+                seatReservation.setNumberOfPassengers(Integer.parseInt(numberOfPassengersField.getText()));
+                seatReservation.setFlyingWithInfant(flyingWithInfantCheckBox.isSelected());
+
+                // Display seatReservation on the console
+                displayInputValues(
+                        seatReservation.getFlightDesignator(),
+                        seatReservation.getFlightDate(),
+                        seatReservation.getFirstName(),
+                        seatReservation.getLastName(),
+                        String.valueOf(seatReservation.getNumberOfPassengers()),
+                        seatReservation.isFlyingWithInfant());
+                // Exit the application using Platform.exit()
+                Platform.exit();
+            } catch (IllegalArgumentException ex) {
+                // Display error message on console
+                System.out.println("Error: " + ex.getMessage());
+            }
         });
 
         // Set up the layout
