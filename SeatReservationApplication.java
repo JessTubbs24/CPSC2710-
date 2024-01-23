@@ -1,7 +1,9 @@
 package edu.au.cpsc.Module2;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -15,6 +17,16 @@ import java.io.IOException;
 public class SeatReservationApplication extends Application {
 
     private SeatReservation seatReservation;
+    private BorderPane root;
+    private GridPane gridPane;
+    private HBox buttonBox;
+    // Input Controls
+    private TextField flightDesignatorField;
+    private DatePicker flightDateDatePicker;
+    private TextField firstNameField;
+    private TextField lastNameField;
+    private TextField numberOfPassengersField;
+    private CheckBox flyingWithInfantCheckBox;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -24,11 +36,11 @@ public class SeatReservationApplication extends Application {
         seatReservation.setFirstName("John");
         seatReservation.setLastName("Doe");
         seatReservation.setNumberOfPassengers(1);
-        seatReservation.setFlyingWithInfant(false);
+        seatReservation.makeNotFlyingWithInfant();
 
-        BorderPane root = new BorderPane();
-        GridPane gridPane = new GridPane();
-        HBox buttonBox = new HBox();
+        root = new BorderPane();
+        gridPane = new GridPane();
+        buttonBox = new HBox();
 
         // Labels
         gridPane.add(new Label("Flight Designator:"), 0, 0);
@@ -39,13 +51,13 @@ public class SeatReservationApplication extends Application {
         gridPane.add(new Label("Flying with Infant:"), 0, 5);
 
         // Input Controls
-        TextField flightDesignatorField = new TextField();
-        DatePicker flightDateDatePicker = new DatePicker();
-        TextField firstNameField = new TextField();
-        TextField lastNameField = new TextField();
-        TextField numberOfPassengersField = new TextField("1");
+        flightDesignatorField = new TextField();
+        flightDateDatePicker = new DatePicker();
+        firstNameField = new TextField();
+        lastNameField = new TextField();
+        numberOfPassengersField = new TextField("1");
         numberOfPassengersField.setEditable(false);
-        CheckBox flyingWithInfantCheckBox = new CheckBox();
+        flyingWithInfantCheckBox = new CheckBox();
 
         gridPane.add(flightDesignatorField, 1, 0);
         gridPane.add(flightDateDatePicker, 1, 1);
@@ -56,6 +68,17 @@ public class SeatReservationApplication extends Application {
 
         // Call updateUI to display initial values
         updateUI();
+
+        flyingWithInfantCheckBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (flyingWithInfantCheckBox.isSelected()) {
+                    numberOfPassengersField.setText("2");
+                } else {
+                    numberOfPassengersField.setText("1");
+                }
+            }
+        });
 
         // Cancel and Save Buttons
         Button cancelButton = new Button("Cancel");
@@ -79,7 +102,7 @@ public class SeatReservationApplication extends Application {
             try {
                 // Populate seatReservation instance variable
                 seatReservation.setFlightDesignator(flightDesignatorField.getText());
-                seatReservation.setFlightDate(flightDateDatePicker.getValue().toString());
+                seatReservation.setFlightDate(LocalDate.parse(flightDateDatePicker.getValue().toString()));
                 seatReservation.setFirstName(firstNameField.getText());
                 seatReservation.setLastName(lastNameField.getText());
                 seatReservation.setNumberOfPassengers(Integer.parseInt(numberOfPassengersField.getText()));
@@ -88,7 +111,7 @@ public class SeatReservationApplication extends Application {
                 // Display seatReservation on the console
                 displayInputValues(
                         seatReservation.getFlightDesignator(),
-                        seatReservation.getFlightDate(),
+                        seatReservation.getFlightDate().toString(),
                         seatReservation.getFirstName(),
                         seatReservation.getLastName(),
                         String.valueOf(seatReservation.getNumberOfPassengers()),
@@ -111,24 +134,11 @@ public class SeatReservationApplication extends Application {
         stage.show();
     }
 
-    //// Set action for flyingWithInfant CheckBox
-    // flyingWithInfantCheckBox.setOnAction(new EventHandler<ActionEvent>() {
-    // @Override
-    // public void handle(ActionEvent event) {
-    // if (flyingWithInfantCheckBox.isSelected()) {
-    // numberOfPassengersField.setText("2");
-    // } else {
-    // numberOfPassengersField.setText("1");
-    // }
-    // }
-    // });
-
     private void updateUI() {
         // Update controls with seatReservation values
         flightDesignatorField.setText(seatReservation.getFlightDesignator());
         // Convert String to LocalDate
-        LocalDate flightDate = LocalDate.parse(seatReservation.getFlightDate());
-        flightDateDatePicker.setValue(flightDate);
+        flightDateDatePicker.setValue(seatReservation.getFlightDate());
         firstNameField.setText(seatReservation.getFirstName());
         lastNameField.setText(seatReservation.getLastName());
         numberOfPassengersField.setText(String.valueOf(seatReservation.getNumberOfPassengers()));
