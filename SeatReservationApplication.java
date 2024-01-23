@@ -12,10 +12,18 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SeatReservationApplication extends Application {
+
+    private SeatReservation seatReservation;
+
     @Override
     public void start(Stage stage) throws IOException {
-        // Load the FXML file if needed
-        // Parent root = FXMLLoader.load(getClass().getResource("your_fxml_file.fxml"));
+        seatReservation = new SeatReservation();
+        seatReservation.setFlightDesignator("ABC123");
+        seatReservation.setFlightDate("2024-01-22");
+        seatReservation.setFirstName("John");
+        seatReservation.setLastName("Doe");
+        seatReservation.setNumberOfPassengers(1);
+        seatReservation.setFlyingWithInfant(false);
 
         BorderPane root = new BorderPane();
         GridPane gridPane = new GridPane();
