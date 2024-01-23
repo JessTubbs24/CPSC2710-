@@ -56,8 +56,10 @@ public class SeatReservationApplication extends Application {
 
         // Set action for Cancel button
         cancelButton.setOnAction(e -> {
-            // Add your cancel logic here
-            stage.close();
+            // Display message on console
+            System.out.println("Cancel clicked");
+            // Exit the application using Platform.exit()
+            Platform.exit();
         });
 
         // Set action for Save button
