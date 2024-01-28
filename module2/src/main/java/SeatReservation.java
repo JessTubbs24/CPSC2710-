@@ -1,5 +1,3 @@
-package edu.au.cpsc.Module2;
-
 import java.time.LocalDate;
 
 public class SeatReservation {
