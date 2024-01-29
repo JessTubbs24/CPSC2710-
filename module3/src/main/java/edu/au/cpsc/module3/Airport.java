@@ -2,11 +2,10 @@ package edu.au.cpsc.module3;
 
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
-
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.FileReader;
 import java.util.List;
+import java.util.ArrayList;
 
     public class Airport {
 
