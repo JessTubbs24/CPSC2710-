@@ -2,6 +2,8 @@ package edu.au.cpsc.module3;
 
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.FileReader;
 import java.util.List;
@@ -20,7 +22,7 @@ import java.util.ArrayList;
         private String gpsCode;
         private String iataCode;
         private String localCode;
-        private Long coordinates;
+        private String coordinates;
 
         public String getIdent() {
             return ident;
@@ -110,11 +112,11 @@ import java.util.ArrayList;
             this.localCode = localCode;
         }
 
-        public Long getCoordinates() {
+        public String  getCoordinates() {
             return coordinates;
         }
 
-        public void setCoordinates(Long coordinates) {
+        public void setCoordinates(String coordinates) {
             this.coordinates = coordinates;
         }
 
@@ -122,7 +124,8 @@ import java.util.ArrayList;
         public static <CSVReader> List<Airport> readAll() throws IOException {
             List<Airport> airports = new ArrayList<>();
 
-            try (com.opencsv.CSVReader csvReader = new CSVReaderBuilder(new FileReader("path/to/your/airport_codes.csv")).build()) {
+
+            try (com.opencsv.CSVReader csvReader = new CSVReaderBuilder(new FileReader("./airport-codes.csv")).build()) {
                 String[] headers = csvReader.readNext(); // Read column headers
 
                 String[] line;
@@ -165,7 +168,7 @@ import java.util.ArrayList;
                                 airport.setLocalCode(line[i]);
                                 break;
                             case "coordinates":
-                                airport.setCoordinates(Long.valueOf(line[i]));
+                                airport.setCoordinates((line[i]));
                                 break;
                             // Add cases for other columns as needed
                         }
@@ -174,6 +177,7 @@ import java.util.ArrayList;
                     airports.add(airport);
                 }
             } catch (CsvValidationException e) {
+                System.out.println("it failed to read");
                 throw new RuntimeException(e);
             }
 
