@@ -25,7 +25,7 @@ public class HelloController {
     @FXML
     private TextField localCode;
     @FXML
-    private TextField iadaCode;
+    private TextField iataCode;
     @FXML
     private Label welcomeText;
     @FXML
@@ -40,14 +40,71 @@ public class HelloController {
     }
     @FXML
     protected void onHelloButtonClick() {
-        System.out.println(ident.getText());
-        Airport airport = airports.stream().filter(f -> f.getIdent().equals(ident.getText())).toList().getFirst();
+        String searchText = getFirstNonEmptyField();
+
+        if (searchText != null) {
+            Airport airport = airports.stream()
+                    .filter(f -> f.getIdent().equals(searchText)
+                            || f.getIataCode().equals(searchText)
+                            || f.getLocalCode().equals(searchText))
+                    .findFirst().orElse(null);
+
+            if (airport != null) {
+                updateFields(airport);
+            }
+        }
+    }
+
+    // Event handler for the Enter key press on ident TextField
+    @FXML
+    protected void onIdentEnterPressed() {
+        searchAndUpdateFields(ident.getText());
+    }
+
+    // Event handler for the Enter key press on iataCode TextField
+    @FXML
+    protected void onIataCodeEnterPressed() {
+        searchAndUpdateFields(iataCode.getText());
+    }
+
+    // Event handler for the Enter key press on localCode TextField
+    @FXML
+    protected void onLocalCodeEnterPressed() {
+        searchAndUpdateFields(localCode.getText());
+    }
+
+    private void searchAndUpdateFields(String searchText) {
+        Airport airport = airports.stream().filter(f -> f.getIdent().equals(searchText)
+                || f.getIataCode().equals(searchText)
+                || f.getLocalCode().equals(searchText)).findFirst().orElse(null);
+
+        if (airport != null) {
+            updateFields(airport);
+        }
+    }
+
+    private void updateFields(Airport airport) {
+        localCode.setText(airport.getLocalCode());
+        iataCode.setText(airport.getIataCode());
+        ident.setText(airport.getIdent());
         type.setText(airport.getType());
-        name.setText((airport.getName()));
+        name.setText(airport.getName());
         elevation.setText(airport.getElevationFt().toString());
         country.setText(airport.getIsoCountry());
         region.setText(airport.getIsoRegion());
         municipality.setText(airport.getMunicipality());
-
     }
+
+    private String getFirstNonEmptyField() {
+        if (!ident.getText().isEmpty()) {
+            return ident.getText();
+        } else if (!iataCode.getText().isEmpty()) {
+            return iataCode.getText();
+        } else if (!localCode.getText().isEmpty()) {
+            return localCode.getText();
+        } else {
+            return null; // No non-empty field found
+        }
+    }
+
 }
