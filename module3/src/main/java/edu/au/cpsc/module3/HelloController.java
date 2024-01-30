@@ -43,9 +43,10 @@ public class HelloController {
     }
     @FXML
     protected void onHelloButtonClick() {
-        String searchText = getFirstNonEmptyField();
+        String text = getFirstNonEmptyField();
 
-        if (searchText != null) {
+        if (text != null) {
+            String searchText = text.toUpperCase();
             Airport airport = airports.stream()
                     .filter(f -> f.getIdent().equals(searchText)
                             || f.getIataCode().equals(searchText)
@@ -59,34 +60,6 @@ public class HelloController {
         }
     }
 
-    // Event handler for the Enter key press on ident TextField
-    @FXML
-    protected void onIdentEnterPressed() {
-        searchAndUpdateFields(ident.getText());
-    }
-
-    // Event handler for the Enter key press on iataCode TextField
-    @FXML
-    protected void onIataCodeEnterPressed() {
-        searchAndUpdateFields(iataCode.getText());
-    }
-
-    // Event handler for the Enter key press on localCode TextField
-    @FXML
-    protected void onLocalCodeEnterPressed() {
-        searchAndUpdateFields(localCode.getText());
-    }
-
-    private void searchAndUpdateFields(String searchText) {
-        Airport airport = airports.stream().filter(f -> f.getIdent().equals(searchText)
-                || f.getIataCode().equals(searchText)
-                || f.getLocalCode().equals(searchText)).findFirst().orElse(null);
-
-        if (airport != null) {
-            updateFields(airport);
-            updateWeatherWebView(airport.getLatitude(), airport.getLongitude());
-        }
-    }
 
     private void updateFields(Airport airport) {
         localCode.setText(airport.getLocalCode());
@@ -114,11 +87,10 @@ public class HelloController {
     }
 
     @FXML
-    private void updateWeatherWebView(BigDecimal latitude, BigDecimal longitude) {
+    private void updateWeatherWebView(String latitude, String longitude) {
         WebEngine webEngine = weatherWebView.getEngine();
-        String url = "https://www.windy.com/?" + latitude + "," + longitude + ",12";
+        String url = "https://www.windy.com/?" + longitude + "," + latitude + ",10";
         webEngine.load(url);
-        System.out.println(url + " was generated.");
     }
 
 }

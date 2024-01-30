@@ -8,8 +8,7 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.math.BigDecimal;
+
 
     public class Airport {
 
@@ -25,8 +24,8 @@ import java.math.BigDecimal;
         private String iataCode;
         private String localCode;
         private String coordinates;
-        private BigDecimal latitude;
-        private BigDecimal longitude;
+        private String latitude;
+        private String longitude;
 
         public String getIdent() {
             return ident;
@@ -124,19 +123,19 @@ import java.math.BigDecimal;
             this.coordinates = coordinates;
         }
 
-        public BigDecimal getLatitude() {
+        public String getLatitude() {
             return latitude;
         }
 
-        public void setLatitude(BigDecimal latitude) {
+        public void setLatitude(String latitude) {
             this.latitude = latitude;
         }
 
-        public BigDecimal getLongitude() {
+        public String getLongitude() {
             return longitude;
         }
 
-        public void setLongitude(BigDecimal longitude) {
+        public void setLongitude(String longitude) {
             this.longitude = longitude;
         }
 
@@ -154,7 +153,6 @@ import java.math.BigDecimal;
                     Airport airport = new Airport();
 
                     for (int i = 0; i < headers.length; i++) {
-                        System.out.println(headers[i] + ": " + line[i]); // Debugging print statement
                         switch (headers[i]) {
                             case "ident":
                                 airport.setIdent(line[i]);
@@ -191,17 +189,10 @@ import java.math.BigDecimal;
                                 break;
                             case "coordinates":
                                 // Split the coordinates into latitude and longitude
-                                String[] coordinates = line[i].split(",");
-                                if (coordinates.length == 2) {
-                                    try {
-                                        airport.setLatitude(new BigDecimal(coordinates[0].trim()));
-                                        airport.setLongitude(new BigDecimal(coordinates[1].trim()));
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("Unable to parse coordinates: " + line[i]);
-                                    }
-                                } else {
-                                    System.out.println("Invalid coordinates format: " + line[i]);
-                                }
+                                String latitude = line[i];
+                                String longitude = line[i+1];
+                                airport.setLatitude(latitude);
+                                airport.setLongitude(longitude);
                                 break;
                         }
                     }
