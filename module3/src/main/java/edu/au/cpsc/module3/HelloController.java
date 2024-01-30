@@ -3,7 +3,10 @@ package edu.au.cpsc.module3;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,9 +30,9 @@ public class HelloController {
     @FXML
     private TextField iataCode;
     @FXML
-    private Label welcomeText;
-    @FXML
     private TextField ident;
+    @FXML
+    private WebView weatherWebView;
     @FXML
     public void initialize(){
         try {
@@ -51,6 +54,7 @@ public class HelloController {
 
             if (airport != null) {
                 updateFields(airport);
+                updateWeatherWebView(airport.getLatitude(), airport.getLongitude());
             }
         }
     }
@@ -80,6 +84,7 @@ public class HelloController {
 
         if (airport != null) {
             updateFields(airport);
+            updateWeatherWebView(airport.getLatitude(), airport.getLongitude());
         }
     }
 
@@ -93,6 +98,7 @@ public class HelloController {
         country.setText(airport.getIsoCountry());
         region.setText(airport.getIsoRegion());
         municipality.setText(airport.getMunicipality());
+
     }
 
     private String getFirstNonEmptyField() {
@@ -105,6 +111,14 @@ public class HelloController {
         } else {
             return null; // No non-empty field found
         }
+    }
+
+    @FXML
+    private void updateWeatherWebView(BigDecimal latitude, BigDecimal longitude) {
+        WebEngine webEngine = weatherWebView.getEngine();
+        String url = "https://www.windy.com/?" + latitude + "," + longitude + ",12";
+        webEngine.load(url);
+        System.out.println(url + " was generated.");
     }
 
 }

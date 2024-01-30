@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.math.BigDecimal;
 
     public class Airport {
 
@@ -23,6 +25,8 @@ import java.util.ArrayList;
         private String iataCode;
         private String localCode;
         private String coordinates;
+        private BigDecimal latitude;
+        private BigDecimal longitude;
 
         public String getIdent() {
             return ident;
@@ -112,13 +116,30 @@ import java.util.ArrayList;
             this.localCode = localCode;
         }
 
-        public String  getCoordinates() {
+        public String getCoordinates() {
             return coordinates;
         }
 
         public void setCoordinates(String coordinates) {
             this.coordinates = coordinates;
         }
+
+        public BigDecimal getLatitude() {
+            return latitude;
+        }
+
+        public void setLatitude(BigDecimal latitude) {
+            this.latitude = latitude;
+        }
+
+        public BigDecimal getLongitude() {
+            return longitude;
+        }
+
+        public void setLongitude(BigDecimal longitude) {
+            this.longitude = longitude;
+        }
+
 
 
         public static <CSVReader> List<Airport> readAll() throws IOException {
@@ -133,6 +154,7 @@ import java.util.ArrayList;
                     Airport airport = new Airport();
 
                     for (int i = 0; i < headers.length; i++) {
+                        System.out.println(headers[i] + ": " + line[i]); // Debugging print statement
                         switch (headers[i]) {
                             case "ident":
                                 airport.setIdent(line[i]);
@@ -168,21 +190,28 @@ import java.util.ArrayList;
                                 airport.setLocalCode(line[i]);
                                 break;
                             case "coordinates":
-                                airport.setCoordinates((line[i]));
+                                // Split the coordinates into latitude and longitude
+                                String[] coordinates = line[i].split(",");
+                                if (coordinates.length == 2) {
+                                    try {
+                                        airport.setLatitude(new BigDecimal(coordinates[0].trim()));
+                                        airport.setLongitude(new BigDecimal(coordinates[1].trim()));
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Unable to parse coordinates: " + line[i]);
+                                    }
+                                } else {
+                                    System.out.println("Invalid coordinates format: " + line[i]);
+                                }
                                 break;
-                            // Add cases for other columns as needed
                         }
                     }
-
                     airports.add(airport);
                 }
             } catch (CsvValidationException e) {
                 System.out.println("it failed to read");
                 throw new RuntimeException(e);
             }
-
             return airports;
         }
 
-        // Additional methods or modifications can be added as needed
     }
