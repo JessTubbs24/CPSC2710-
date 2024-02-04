@@ -7,8 +7,8 @@ import java.util.Set;
 import static javafx.application.Application.launch;
 
 public class ScheduledFlight {
-    public ScheduledFlight() {
-    }
+//    public ScheduledFlight() {
+//    }
         private String flightDesignator;
         private String departureAirportIdent;
         private LocalTime departureTime;
