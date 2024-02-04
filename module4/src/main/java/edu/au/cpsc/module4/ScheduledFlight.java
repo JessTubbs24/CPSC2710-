@@ -1,20 +1,14 @@
 package edu.au.cpsc.module4;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import java.io.IOException;
-
 import static javafx.application.Application.launch;
 
-public class DomainModel {
-    public static class ScheduledFlight {
-
+public class ScheduledFlight {
+    public ScheduledFlight() {
+    }
         private String flightDesignator;
         private String departureAirportIdent;
         private LocalTime departureTime;
@@ -104,5 +98,3 @@ public class DomainModel {
             launch();
         }
     }
-
-}
