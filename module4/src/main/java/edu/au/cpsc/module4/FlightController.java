@@ -2,15 +2,13 @@ package edu.au.cpsc.module4;
 
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 public class FlightController {
 
@@ -21,16 +19,17 @@ public class FlightController {
     private TableView<ScheduledFlight> flightTableView;
 
     @FXML
-    private TableColumn<ScheduledFlight, String>  flightDesignatorColumn, departureAirportIdentColumn, arrivalAirportIdentColumn;
+    private TableColumn<ScheduledFlight, String>  flightDesignatorColumn, departureAirportIdentColumn, arrivalAirportIdentColumn, daysOfWeekColumn;
 
     public void initialize() {
-        flightDesignatorColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight, String>("Flight Designator"));
-        departureAirportIdentColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight, String>("Departure Airport Ident"));
-        arrivalAirportIdentColumn.setCellValueFactory(new PropertyValueFactory<ScheduledFlight, String>("Arrival Airport Ident"));
+        flightDesignatorColumn.setCellValueFactory(new PropertyValueFactory<>("flightDesignator"));
+        departureAirportIdentColumn.setCellValueFactory(new PropertyValueFactory<>("departureAirportIdent"));
+        arrivalAirportIdentColumn.setCellValueFactory(new PropertyValueFactory<>("arrivalAirportIdent"));
+        daysOfWeekColumn.setCellValueFactory(new PropertyValueFactory<>("daysOfWeek"));
 
         try {
-            InputStream inputStream = new FileInputStream("file.dat");
-            AirlineDatabase adb = AirlineDatabaseIO.load(inputStream);
+            //InputStream inputStream = new FileInputStream("file.dat");
+            AirlineDatabase adb = AirlineDatabaseIO.load(null);
             SortedList<ScheduledFlight> sortedList = new SortedList<> (
                     FXCollections.observableList(adb.getScheduledFlights()));
             flightTableView.setItems(sortedList);
@@ -54,5 +53,8 @@ public class FlightController {
         flightDesignatorTextField.setText(selectedScheduledFlight.getFlightDesignator());
         departureAirportIdentTextField.setText(selectedScheduledFlight.getDepartureAirportIdent());
         arrivalAirportIdentTextField.setText(selectedScheduledFlight.getArrivalAirportIdent());
+    }
+
+    public void onStoreButtonClick(ActionEvent actionEvent) {
     }
 }
