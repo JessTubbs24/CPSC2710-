@@ -1,23 +1,24 @@
 package edu.au.cpsc.module4;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
 import static javafx.application.Application.launch;
 
-public class ScheduledFlight {
+public class ScheduledFlight implements Serializable {
 
         private String flightDesignator;
         private String departureAirportIdent;
         private LocalTime departureTime;
         private String arrivalAirportIdent;
         private LocalTime arrivalTime;
-        private Set<String> daysOfWeek;
+        private HashSet<String> daysOfWeek;
 
         // Constructor
         public ScheduledFlight(String flightDesignator, String departureAirportIdent, LocalTime departureTime,
-                               String arrivalAirportIdent, LocalTime arrivalTime, Set<String> daysOfWeek) {
+                               String arrivalAirportIdent, LocalTime arrivalTime, HashSet<String> daysOfWeek) {
             this.flightDesignator = flightDesignator;
             this.departureAirportIdent = departureAirportIdent;
             this.departureTime = departureTime;
@@ -26,7 +27,7 @@ public class ScheduledFlight {
             this.daysOfWeek = (daysOfWeek != null) ? new HashSet<>(daysOfWeek) : new HashSet<>();
         }
 
-        public String getFlightDesignator() {
+    public String getFlightDesignator() {
             return flightDesignator;
         }
 
@@ -82,11 +83,11 @@ public class ScheduledFlight {
             this.arrivalTime = arrivalTime;
         }
 
-        public Set<String> getDaysOfWeek() {
+        public HashSet<String> getDaysOfWeek() {
             return new HashSet<>(daysOfWeek);
         }
 
-        public void setDaysOfWeek(Set<String> daysOfWeek) {
+        public void setDaysOfWeek(HashSet<String> daysOfWeek) {
             if (daysOfWeek == null) {
                 throw new IllegalArgumentException("Days of week cannot be null.");
             }

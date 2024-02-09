@@ -32,7 +32,7 @@ public class FlightScheduleApplication extends Application {
 
 
         scene = new Scene(fxmlLoader.load(), sceneWidth, sceneHeight);
-        stage.setTitle("Hello!");
+        stage.setTitle("Flight Designator");
         stage.setScene(scene);
         stage.show();
 
