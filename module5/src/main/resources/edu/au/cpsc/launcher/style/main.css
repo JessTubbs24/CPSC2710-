@@ -1,0 +1,62 @@
+@import "font.css";
+
+.background {
+    -fx-background-color: #36454F;
+}
+
+Button {
+    -fx-font-family: "Lilita One";
+    -fx-font-size: 20pt;
+    -fx-alignment: center;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+}
+
+Button:hover {
+    -fx-border-color: white;
+    -fx-border-width: 5px;
+    -fx-font-weight: bold;
+    -fx-font-size: 25px;
+}
+
+Button:pressed {
+    -fx-border-color: white;
+    -fx-border-width: 5px;
+    -fx-font-weight: bold;
+    -fx-font-size: 25px;
+    -fx-rotate: 10;
+}
+
+#airports-btn {
+    -fx-graphic: url(../img/Airports.png);
+    -fx-background-image: url(../img/Airport_block1.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: cover;
+}
+
+#seat-reservation-btn {
+    -fx-graphic: url(../img/Reservation.png);
+    -fx-background-image: url(../img/Airport_block2.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: cover;
+}
+
+#flight-schedule-btn {
+    -fx-graphic: url(../img/Schedule.png);
+    -fx-background-image: url(../img/Airport_block3.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: cover;
+}
+
+#aircraft-btn {
+    -fx-graphic: url(../img/Aircraft.png);
+    -fx-background-image: url(../img/Airport_block4.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: cover;
+ }
+
