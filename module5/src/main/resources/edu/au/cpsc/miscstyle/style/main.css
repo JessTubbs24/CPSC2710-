@@ -1,0 +1,26 @@
+.background {
+    -fx-background-color: #dad7cd;
+}
+
+.foreground {
+    -fx-fill: #272838;
+}
+
+.highlight {
+    -fx-fill: #ff6b6b;
+}
+
+.accent {
+    -fx-fill: #7e7f9a;
+}
+
+VBox Rectangle {
+    -fx-stroke-width: 5px;
+    -fx-stroke: rgb(70,155,75);
+    -fx-fill: transparent;
+}
+
+VBox Circle {
+    -fx-fill: #7e7f9a;
+}
+
