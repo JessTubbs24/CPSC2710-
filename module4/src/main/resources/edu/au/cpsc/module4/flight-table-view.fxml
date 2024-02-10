@@ -26,63 +26,63 @@
             </columns>
         </TableView>
     </center>
-   <bottom>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-              <GridPane prefHeight="112.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
-                  <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="142.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="449.0" minWidth="10.0" prefWidth="300.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-                      <Label fx:id="flightDesignatorLabel" text="   Flight Designator:">
-                          <font>
-                              <Font name="Century Gothic" size="12.0" />
-                          </font>
-                      </Label>
-                      <Label fx:id="departureAirportIdentLabel" text="   Departure Airport Ident:" GridPane.rowIndex="1" />
-                      <Label fx:id="arrivalAirportIdentLabel" text="   Arrival Airport Ident:" GridPane.rowIndex="2" />
-                      <TextField fx:id="flightDesignatorTextField" GridPane.columnIndex="1" />
-                      <TextField fx:id="departureAirportIdentTextField" prefHeight="25.0" prefWidth="326.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                      <TextField fx:id="arrivalAirportIdentTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                      <Label fx:id="daysOfTheWeekLabel" prefHeight="15.0" prefWidth="154.0" text="   Days of the Week:" GridPane.rowIndex="3">
-                          <font>
-                              <Font name="Century Gothic" size="12.0" />
-                          </font>
-                      </Label>
-                      <HBox prefHeight="41.0" prefWidth="600.0" GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="daysOfTheWeek" >
-                          <children>
-                              <ToggleButton fx:id="sundayButton" mnemonicParsing="false" text="U" />
-                              <ToggleButton fx:id="mondayButton" mnemonicParsing="false" text="M" />
-                              <ToggleButton fx:id="tuesdayButton" mnemonicParsing="false" text="T" />
-                              <ToggleButton fx:id="wednesdayButton" mnemonicParsing="false" text="W" />
-                              <ToggleButton fx:id="thursdayButton" mnemonicParsing="false" text="R" />
-                              <ToggleButton fx:id="fridayButton" mnemonicParsing="false" text="F" />
-                              <ToggleButton fx:id="saturdayButton" mnemonicParsing="false" text="S" />
-                          </children>
-                      </HBox>
-                  </children>
-              </GridPane>
-            <VBox prefHeight="100.0" prefWidth="316.0" spacing="2.0">
-               <children>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#updateButtonAction" text="Update" />
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#newButtonAction" text="New" />
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteButtonAction" text="Delete" />
-               </children>
-               <padding>
-                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-               </padding>
-            </VBox>
-         </children>
-         <BorderPane.margin>
-            <Insets left="2.0" />
-         </BorderPane.margin>
-      </HBox>
-   </bottom>
+    <bottom>
+        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <GridPane prefHeight="112.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="142.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="449.0" minWidth="10.0" prefWidth="300.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Label fx:id="flightDesignatorLabel" text="   Flight Designator:">
+                            <font>
+                                <Font name="Century Gothic" size="12.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="departureAirportIdentLabel" text="   Departure Airport Ident:" GridPane.rowIndex="1" />
+                        <Label fx:id="arrivalAirportIdentLabel" text="   Arrival Airport Ident:" GridPane.rowIndex="2" />
+                        <TextField fx:id="flightDesignatorTextField" GridPane.columnIndex="1" />
+                        <TextField fx:id="departureAirportIdentTextField" prefHeight="25.0" prefWidth="326.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="arrivalAirportIdentTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="daysOfTheWeekLabel" prefHeight="15.0" prefWidth="154.0" text="   Days of the Week:" GridPane.rowIndex="3">
+                            <font>
+                                <Font name="Century Gothic" size="12.0" />
+                            </font>
+                        </Label>
+                        <HBox prefHeight="41.0" prefWidth="600.0" GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="daysOfTheWeek" >
+                            <children>
+                                <ToggleButton fx:id="sundayButton" mnemonicParsing="false" text="U" />
+                                <ToggleButton fx:id="mondayButton" mnemonicParsing="false" text="M" />
+                                <ToggleButton fx:id="tuesdayButton" mnemonicParsing="false" text="T" />
+                                <ToggleButton fx:id="wednesdayButton" mnemonicParsing="false" text="W" />
+                                <ToggleButton fx:id="thursdayButton" mnemonicParsing="false" text="R" />
+                                <ToggleButton fx:id="fridayButton" mnemonicParsing="false" text="F" />
+                                <ToggleButton fx:id="saturdayButton" mnemonicParsing="false" text="S" />
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+                <VBox prefHeight="100.0" prefWidth="316.0" spacing="2.0">
+                    <children>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#updateButtonAction" text="Update" />
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#newButtonAction" text="New" />
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteButtonAction" text="Delete" />
+                    </children>
+                    <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                    </padding>
+                </VBox>
+            </children>
+            <BorderPane.margin>
+                <Insets left="2.0" />
+            </BorderPane.margin>
+        </HBox>
+    </bottom>
 </BorderPane>
