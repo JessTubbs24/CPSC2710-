@@ -44,6 +44,7 @@ public class FlightController {
         flightDesignatorTextField.textProperty().bindBidirectional(model.flightDesignatorProperty());
         departureAirportIdentTextField.textProperty().bindBidirectional(model.departureAirportIdentProperty());
         arrivalAirportIdentTextField.textProperty().bindBidirectional(model.arrivalAirportIdentProperty());
+        daysOfTheWeek.accessibleTextProperty().bindBidirectional(model.daysOfWeekProperty());
 
         flightDesignatorColumn.setCellValueFactory(new PropertyValueFactory<>("flightDesignator"));
         departureAirportIdentColumn.setCellValueFactory(new PropertyValueFactory<>("departureAirportIdent"));
@@ -71,15 +72,15 @@ public class FlightController {
     private void tableSelectionChanged() {
         ScheduledFlight selectedScheduledFlight = flightTableView.getSelectionModel().getSelectedItem();
         if (selectedScheduledFlight == null) {
-            flightDesignatorTextField.clear();
-            departureAirportIdentTextField.clear();
-            arrivalAirportIdentTextField.clear();
+            model.setFlightDesignator("");
+            model.setDepartureAirportIdent("");
+            model.setArrivalAirportIdent("");
             return;
         }
-        flightDesignatorTextField.setText(selectedScheduledFlight.getFlightDesignator());
-        departureAirportIdentTextField.setText(selectedScheduledFlight.getDepartureAirportIdent());
-        arrivalAirportIdentTextField.setText(selectedScheduledFlight.getArrivalAirportIdent());
-        HashSet<String> set2 =selectedScheduledFlight.getDaysOfWeek();
+        model.setFlightDesignator(selectedScheduledFlight.getFlightDesignator());
+        model.setDepartureAirportIdent(selectedScheduledFlight.getDepartureAirportIdent());
+        model.setArrivalAirportIdent(selectedScheduledFlight.getArrivalAirportIdent());
+        HashSet<String> set2 = selectedScheduledFlight.getDaysOfWeek();
 
         ObservableList<Node> buttons = daysOfTheWeek.getChildren();
         buttons.forEach((button) -> {
@@ -147,9 +148,9 @@ public class FlightController {
             }
         });
         System.out.println(set2.toString());
-        System.out.println(flightDesignatorTextField.getText());
-        System.out.println(departureAirportIdentTextField.getText());
-        System.out.println(arrivalAirportIdentTextField.getText());
+        System.out.println(model.getFlightDesignator());
+        System.out.println(model.getDepartureAirportIdent());
+        System.out.println(model.getArrivalAirportIdent());
 
 
         ScheduledFlight newFlight = new ScheduledFlight(

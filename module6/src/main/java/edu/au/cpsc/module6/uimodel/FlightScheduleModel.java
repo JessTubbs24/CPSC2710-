@@ -1,30 +1,34 @@
 package edu.au.cpsc.module6.uimodel;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class FlightScheduleModel {
 
-    private final SimpleStringProperty flightDesignator;
-    private final SimpleStringProperty departureAirportIdent;
-    private final SimpleStringProperty arrivalAirportIdent;
+    private final StringProperty flightDesignator;
+    private final StringProperty departureAirportIdent;
+    private final StringProperty arrivalAirportIdent;
+    private final StringProperty daysOfWeek;
 
     public FlightScheduleModel() {
         flightDesignator = new SimpleStringProperty();
         departureAirportIdent = new SimpleStringProperty();
         arrivalAirportIdent = new SimpleStringProperty();
+        daysOfWeek = new SimpleStringProperty();
     }
 
-    public SimpleStringProperty flightDesignatorProperty() {
+    public StringProperty flightDesignatorProperty() {
         return flightDesignator;
     }
 
-    public SimpleStringProperty departureAirportIdentProperty() {
+    public StringProperty departureAirportIdentProperty() {
         return departureAirportIdent;
     }
 
-    public SimpleStringProperty arrivalAirportIdentProperty() {
+    public StringProperty arrivalAirportIdentProperty() {
         return arrivalAirportIdent;
     }
+    public StringProperty daysOfWeekProperty() { return daysOfWeek; }
 
     public java.lang.String getFlightDesignator() {
         return flightDesignator.get();
@@ -40,5 +44,15 @@ public class FlightScheduleModel {
     }
     public java.lang.String getArrivalAirportIdent() {
         return arrivalAirportIdent.get();
+    }
+
+    public void setArrivalAirportIdent(java.lang.String arrivalAirportIdent) {
+        arrivalAirportIdentProperty().set(arrivalAirportIdent);
+    }
+
+    public String getDaysOfWeek() { return daysOfWeek.get(); }
+
+    public void setDaysOfWeek(java.lang.String daysOfWeek) {
+        daysOfWeekProperty().set(daysOfWeek);
     }
 }
