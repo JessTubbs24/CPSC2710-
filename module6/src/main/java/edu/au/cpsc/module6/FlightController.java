@@ -1,6 +1,9 @@
 package edu.au.cpsc.module6;
 
 import com.sun.javafx.charts.Legend;
+import edu.au.cpsc.module6.AirlineDatabase;
+import edu.au.cpsc.module6.AirlineDatabaseIO;
+import edu.au.cpsc.module6.uimodel.FlightScheduleModel;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -33,7 +36,15 @@ public class FlightController {
     private TableColumn<ScheduledFlight, String>  flightDesignatorColumn, departureAirportIdentColumn, arrivalAirportIdentColumn, daysOfWeekColumn;
     private Legend.LegendItem arrivalTimeTextField;
     private AirlineDatabase adb;
+
+    private FlightScheduleModel model;
+
     public void initialize() {
+        model = new FlightScheduleModel();
+        flightDesignatorTextField.textProperty().bindBidirectional(model.flightDesignatorProperty());
+        departureAirportIdentTextField.textProperty().bindBidirectional(model.departureAirportIdentProperty());
+        arrivalAirportIdentTextField.textProperty().bindBidirectional(model.arrivalAirportIdentProperty());
+
         flightDesignatorColumn.setCellValueFactory(new PropertyValueFactory<>("flightDesignator"));
         departureAirportIdentColumn.setCellValueFactory(new PropertyValueFactory<>("departureAirportIdent"));
         arrivalAirportIdentColumn.setCellValueFactory(new PropertyValueFactory<>("arrivalAirportIdent"));
