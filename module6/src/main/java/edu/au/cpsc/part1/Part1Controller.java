@@ -33,16 +33,15 @@ private TextField tweetTextField;
 private Label numberOfCharactersLabel, validityLabel;
 
 public void initialize() {
-  // binding to reflect text changes from messageTextField to echoTextField
-        // Why won't text show in field when .bind??????
-  messageTextField.textProperty().bindBidirectional(echoTextField.textProperty());
+  // bind to reflect text changes from messageTextField to echoTextField
+  echoTextField.textProperty().bind(messageTextField.textProperty());
 
   //  bi-directional property binding between firstBidirectionalTextField and secondBidirectionalTextField
   firstBidirectionalTextField.textProperty().bindBidirectional(secondBidirectionalTextField.textProperty());
 
   // set the opacity of secretOverlapImageView based on secretSlider value
       //why can't I see the img.png??
-  secretOverlayImageView.opacityProperty().bind(secretSlider.valueProperty().divide(100));
+  secretOverlayImageView.opacityProperty().bind(secretSlider.valueProperty().divide(1));
 
   // display true/false based on selectMeCheckBox state
   selectMeLabel.textProperty().bind(Bindings.when(selectMeCheckBox.selectedProperty()).then("true").otherwise("false"));

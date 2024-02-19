@@ -4,6 +4,7 @@ import com.sun.javafx.charts.Legend;
 import edu.au.cpsc.module6.AirlineDatabase;
 import edu.au.cpsc.module6.AirlineDatabaseIO;
 import edu.au.cpsc.module6.uimodel.FlightScheduleModel;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -18,39 +19,30 @@ import java.util.HashSet;
 
 public class FlightController {
 
-    public ToggleButton mondayButton;
-    public ToggleButton sundayButton;
-    public ToggleButton wednesdayButton;
-    public ToggleButton tuesdayButton;
-    public ToggleButton fridayButton;
-    public ToggleButton thursdayButton;
-    public ToggleButton saturdayButton;
+    public ToggleButton mondayButton, sundayButton, wednesdayButton, tuesdayButton, fridayButton, thursdayButton, saturdayButton;
     public HBox daysOfTheWeek;
+    public Button updateButton, newButton, deleteButton;
     @FXML
     private TextField flightDesignatorTextField, departureAirportIdentTextField, arrivalAirportIdentTextField;
-
     @FXML
     private TableView<ScheduledFlight> flightTableView;
-
     @FXML
     private TableColumn<ScheduledFlight, String>  flightDesignatorColumn, departureAirportIdentColumn, arrivalAirportIdentColumn, daysOfWeekColumn;
     private Legend.LegendItem arrivalTimeTextField;
     private AirlineDatabase adb;
-
     private FlightScheduleModel model;
+    public void initialize() throws IOException, ClassNotFoundException {
 
-    public void initialize() {
         model = new FlightScheduleModel();
         flightDesignatorTextField.textProperty().bindBidirectional(model.flightDesignatorProperty());
         departureAirportIdentTextField.textProperty().bindBidirectional(model.departureAirportIdentProperty());
         arrivalAirportIdentTextField.textProperty().bindBidirectional(model.arrivalAirportIdentProperty());
-        daysOfTheWeek.accessibleTextProperty().bindBidirectional(model.daysOfWeekProperty());
+        bindButtonEnable();
 
         flightDesignatorColumn.setCellValueFactory(new PropertyValueFactory<>("flightDesignator"));
         departureAirportIdentColumn.setCellValueFactory(new PropertyValueFactory<>("departureAirportIdent"));
         arrivalAirportIdentColumn.setCellValueFactory(new PropertyValueFactory<>("arrivalAirportIdent"));
         daysOfWeekColumn.setCellValueFactory(new PropertyValueFactory<>("daysOfWeek"));
-
         try {
             try (InputStream inputStream = new FileInputStream("airline.dat")) {
                 this.adb = AirlineDatabaseIO.load(inputStream);
@@ -69,18 +61,55 @@ public class FlightController {
 
     }
 
+    private void bindVisualEnable() {
+        if(!model.fdValidProperty().getValue()){
+            flightDesignatorTextField.styleProperty().bind(model.fdValidProperty().asString().map(s -> "-fx-border-color: red;"));
+        }
+        else{
+            flightDesignatorTextField.styleProperty().bind(model.fdValidProperty().asString().map(s -> "-fx-border-color: green;"));
+        }
+        if(!model.daiValidProperty().getValue()){
+            departureAirportIdentTextField.styleProperty().bind(model.daiValidProperty().asString().map(s -> "-fx-border-color: red;"));
+        }
+        else{
+            departureAirportIdentTextField.styleProperty().bind(model.daiValidProperty().asString().map(s -> "-fx-border-color: green;"));
+        }
+        System.out.println("value is: " + model.aaiValidProperty().getValue());
+        if(!model.aaiValidProperty().getValue()){
+            arrivalAirportIdentTextField.styleProperty().bind(model.aaiValidProperty().asString().map(s -> "-fx-border-color: red;"));
+        }
+        else{
+            arrivalAirportIdentTextField.styleProperty().bind(model.aaiValidProperty().asString().map(s -> "-fx-border-color: green;"));
+        }
+
+
+    }
+
+    private void bindButtonEnable() {
+        daysOfTheWeek.accessibleTextProperty().bindBidirectional(model.daysOfWeekProperty());
+        updateButton.disableProperty().bind(getModel().modifiedProperty().not());
+        newButton.disableProperty().bind(getModel().newProperty());
+        deleteButton.disableProperty().bind(getModel().modifiedProperty().or(getModel().newProperty()));
+    }
+
+    public FlightScheduleModel getModel() { return model; }
+
     private void tableSelectionChanged() {
         ScheduledFlight selectedScheduledFlight = flightTableView.getSelectionModel().getSelectedItem();
         if (selectedScheduledFlight == null) {
             model.setFlightDesignator("");
             model.setDepartureAirportIdent("");
             model.setArrivalAirportIdent("");
+            model.setModified(false);
+            model.setNew(true);
             return;
         }
         model.setFlightDesignator(selectedScheduledFlight.getFlightDesignator());
         model.setDepartureAirportIdent(selectedScheduledFlight.getDepartureAirportIdent());
         model.setArrivalAirportIdent(selectedScheduledFlight.getArrivalAirportIdent());
         HashSet<String> set2 = selectedScheduledFlight.getDaysOfWeek();
+        model.setModified(false);
+        model.setNew(false);
 
         ObservableList<Node> buttons = daysOfTheWeek.getChildren();
         buttons.forEach((button) -> {
@@ -97,12 +126,20 @@ public class FlightController {
 
     @FXML
     protected void updateButtonAction() throws IOException, ClassNotFoundException {
+
+        if (!model.isValid()) {
+            bindVisualEnable();
+
+            return;
+        }
+        bindVisualEnable();
+
         ScheduledFlight selectedScheduledFlight = flightTableView.getSelectionModel().getSelectedItem();
         if (selectedScheduledFlight != null) {
             // Update the selected flight with information from text fields
-            selectedScheduledFlight.setFlightDesignator(flightDesignatorTextField.getText());
-            selectedScheduledFlight.setDepartureAirportIdent(departureAirportIdentTextField.getText());
-            selectedScheduledFlight.setArrivalAirportIdent(arrivalAirportIdentTextField.getText());
+            selectedScheduledFlight.setFlightDesignator(model.getFlightDesignator());
+            selectedScheduledFlight.setDepartureAirportIdent(model.getDepartureAirportIdent());
+            selectedScheduledFlight.setArrivalAirportIdent(model.getArrivalAirportIdent());
             HashSet<String> set2 = new HashSet<String> ();
 
             ObservableList<Node> buttons = daysOfTheWeek.getChildren();
@@ -112,13 +149,15 @@ public class FlightController {
                     set2.add(tb.getText());
                 }
             });
-            selectedScheduledFlight.setDaysOfWeek(set2);// Optionally, update the table view to reflect the changes
+            selectedScheduledFlight.setDaysOfWeek(set2);
             flightTableView.refresh();
             File generatedfile= new File("airline.dat");
             try (FileOutputStream fileOutStream = new FileOutputStream(generatedfile)) {
                 AirlineDatabaseIO.save(adb, fileOutStream);
 
             }
+        } else {
+            bindVisualEnable();
         }
     }
 
@@ -134,42 +173,46 @@ public class FlightController {
                 AirlineDatabaseIO.save(adb, fileOutStream);
 
             }
+        } else {
+            bindVisualEnable();
         }
     }
 
     @FXML
     protected void newButtonAction() throws IOException, ClassNotFoundException {
-        HashSet<String> set2 = new HashSet<String>();
-        ObservableList<Node> buttons = daysOfTheWeek.getChildren();
-        buttons.forEach((button) -> {
-            ToggleButton tb = (ToggleButton) button;
-            if (tb.isSelected()) {
-                set2.add(tb.getText());
-            }
-        });
-        System.out.println(set2.toString());
-        System.out.println(model.getFlightDesignator());
-        System.out.println(model.getDepartureAirportIdent());
-        System.out.println(model.getArrivalAirportIdent());
-
-
-        ScheduledFlight newFlight = new ScheduledFlight(
-                flightDesignatorTextField.getText(),
-                departureAirportIdentTextField.getText(),
-                LocalTime.MIDNIGHT,
-                arrivalAirportIdentTextField.getText(),
-                LocalTime.NOON,
-                set2
-        );
-
-        adb.addScheduledFlight(newFlight);
-        System.out.println(adb.getScheduledFlights().size());
-        File generatedfile = new File("airline.dat");
-        try (FileOutputStream fileOutStream = new FileOutputStream(generatedfile)) {
-            AirlineDatabaseIO.save(adb, fileOutStream);
-
+        if (!model.isValid()) {
+            bindVisualEnable();
+            return;
         }
+        bindVisualEnable();
+        HashSet<String> set2 = new HashSet<String>();
+            ObservableList<Node> buttons = daysOfTheWeek.getChildren();
+            buttons.forEach((button) -> {
+                ToggleButton tb = (ToggleButton) button;
+                if (tb.isSelected()) {
+                    set2.add(tb.getText());
+                }
+            });
+            ScheduledFlight newFlight = new ScheduledFlight(
+                    model.getFlightDesignator(),
+                    model.getDepartureAirportIdent(),
+                    LocalTime.MIDNIGHT,
+                    model.getArrivalAirportIdent(),
+                    LocalTime.NOON,
+                    set2
+            );
 
+            adb.addScheduledFlight(newFlight);
+            System.out.println(adb.getScheduledFlights().size());
+            File generatedfile = new File("airline.dat");
+            try (FileOutputStream fileOutStream = new FileOutputStream(generatedfile)) {
+                AirlineDatabaseIO.save(adb, fileOutStream);
+
+            }
+            flightTableView.getSelectionModel().selectLast();
+        flightTableView.scrollTo(flightTableView.getSelectionModel().getSelectedItem());
+        //} else {
+       // }
     }
 
 }

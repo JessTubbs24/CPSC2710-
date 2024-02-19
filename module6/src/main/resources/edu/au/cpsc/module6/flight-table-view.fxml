@@ -17,7 +17,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.au.cpsc.module6.FlightController">
     <center>
-        <TableView fx:id="flightTableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <TableView fx:id="flightTableView" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="flightDesignatorColumn" prefWidth="134.0" text="Flight Designator" />
                 <TableColumn fx:id="departureAirportIdentColumn" prefWidth="165.0" text="Departure Airport Ident" />
@@ -27,12 +27,12 @@
         </TableView>
     </center>
     <bottom>
-        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <HBox minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <GridPane prefHeight="112.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
+                <GridPane minHeight="-Infinity" prefHeight="122.0" prefWidth="342.0" HBox.hgrow="ALWAYS">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="142.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="449.0" minWidth="10.0" prefWidth="300.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="449.0" minWidth="10.0" prefWidth="230.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -49,14 +49,15 @@
                         <Label fx:id="departureAirportIdentLabel" text="   Departure Airport Ident:" GridPane.rowIndex="1" />
                         <Label fx:id="arrivalAirportIdentLabel" text="   Arrival Airport Ident:" GridPane.rowIndex="2" />
                         <TextField fx:id="flightDesignatorTextField" GridPane.columnIndex="1" />
-                        <TextField fx:id="departureAirportIdentTextField" prefHeight="25.0" prefWidth="326.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="departureAirportIdentTextField" prefHeight="25.0" prefWidth="211.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="arrivalAirportIdentTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
                         <Label fx:id="daysOfTheWeekLabel" prefHeight="15.0" prefWidth="154.0" text="   Days of the Week:" GridPane.rowIndex="3">
                             <font>
                                 <Font name="Century Gothic" size="12.0" />
                             </font>
                         </Label>
-                        <HBox prefHeight="41.0" prefWidth="600.0" GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="daysOfTheWeek" >
+                        <HBox fx:id="daysOfTheWeek" prefHeight="41.0" prefWidth="600.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                             <children>
                                 <ToggleButton fx:id="sundayButton" mnemonicParsing="false" text="U" />
                                 <ToggleButton fx:id="mondayButton" mnemonicParsing="false" text="M" />
@@ -67,13 +68,14 @@
                                 <ToggleButton fx:id="saturdayButton" mnemonicParsing="false" text="S" />
                             </children>
                         </HBox>
+
                     </children>
                 </GridPane>
-                <VBox prefHeight="100.0" prefWidth="316.0" spacing="2.0">
+                <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="122.0" prefWidth="226.0" spacing="2.0">
                     <children>
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#updateButtonAction" text="Update" />
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#newButtonAction" text="New" />
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteButtonAction" text="Delete" />
+                        <Button fx:id="updateButton" maxWidth="1.7976931348623157E308" minHeight="-Infinity" mnemonicParsing="false" onAction="#updateButtonAction" prefHeight="25.0" prefWidth="217.0" text="Update" />
+                        <Button fx:id="newButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#newButtonAction" text="New" />
+                        <Button fx:id="deleteButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteButtonAction" text="Delete" />
                     </children>
                     <padding>
                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
