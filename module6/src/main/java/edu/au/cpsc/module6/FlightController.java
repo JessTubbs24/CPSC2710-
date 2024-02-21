@@ -1,6 +1,5 @@
 package edu.au.cpsc.module6;
 
-import com.sun.javafx.charts.Legend;
 import edu.au.cpsc.module6.AirlineDatabase;
 import edu.au.cpsc.module6.AirlineDatabaseIO;
 import edu.au.cpsc.module6.uimodel.FlightScheduleModel;
@@ -28,7 +27,6 @@ public class FlightController {
     private TableView<ScheduledFlight> flightTableView;
     @FXML
     private TableColumn<ScheduledFlight, String>  flightDesignatorColumn, departureAirportIdentColumn, arrivalAirportIdentColumn, daysOfWeekColumn;
-    private Legend.LegendItem arrivalTimeTextField;
     private AirlineDatabase adb;
     private FlightScheduleModel model;
     public void initialize() throws IOException, ClassNotFoundException {
