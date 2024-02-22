@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+
+
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="edu.au.cpsc.module7.TaskCardController"
+      spacing="10">
+    <!-- Other task details (summary, description, etc.) -->
+    <Label fx:id="summaryLabel"/>
+    <Label fx:id="stateLabel"/>
+
+</HBox>
