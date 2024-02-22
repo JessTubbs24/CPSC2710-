@@ -55,7 +55,7 @@
       </ComboBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
-            <Button fx:id="doneButton" mnemonicParsing="false" text="Done" onAction="#saveTask">
+            <Button fx:id="doneButton" mnemonicParsing="false" text="Save" onAction="#saveTask">
                <HBox.margin>
                   <Insets right="4.0" />
                </HBox.margin>

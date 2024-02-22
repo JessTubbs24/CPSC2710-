@@ -8,19 +8,19 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class TaskManagerApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(TaskManagerApplication.class.getResource("task-manager.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Task Manager!");
         stage.setScene(scene);
         stage.show();
     }
-    public static void openAddEditTaskWindow(TaskModel task, HelloController controller) {
+    public static void openAddEditTaskWindow(TaskModel task, TaskManagerController controller) {
         Stage stage = new Stage();
         try {
-            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("create-new-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(TaskManagerApplication.class.getResource("create-new-view.fxml"));
             Parent root = loader.load();
             CreateNewController addEditTaskController = loader.getController();
             addEditTaskController.setMainController(controller);

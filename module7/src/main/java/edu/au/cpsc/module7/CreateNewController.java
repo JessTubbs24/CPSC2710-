@@ -1,12 +1,14 @@
 package edu.au.cpsc.module7;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class CreateNewController {
-    private HelloController mainController;
+    public Button doneButton;
+    private TaskManagerController mainController;
     private TaskModel task;
 
     @FXML
@@ -18,7 +20,7 @@ public class CreateNewController {
     @FXML
     private TextArea descriptionTextArea;
 
-    public void setMainController(HelloController mainController) {
+    public void setMainController(TaskManagerController mainController) {
         this.mainController = mainController;
     }
     @FXML
@@ -33,6 +35,9 @@ public class CreateNewController {
             taskTextField.setText(task.getSummary());
             statusComboBox.setValue(task.getState());
             descriptionTextArea.setText(task.getDescription());
+        }
+        else{
+            doneButton.setText("Create");
         }
     }
 

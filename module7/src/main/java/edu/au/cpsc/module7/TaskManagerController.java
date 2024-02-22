@@ -1,27 +1,20 @@
 package edu.au.cpsc.module7;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class HelloController {
+public class TaskManagerController {
     @FXML
     private ListView<TaskModel> todoListView;
 
@@ -133,7 +126,7 @@ public class HelloController {
             }
     }
     public void createTask(ActionEvent actionEvent) {
-        HelloApplication.openAddEditTaskWindow(null, this);
+        TaskManagerApplication.openAddEditTaskWindow(null, this);
     }
 
     public void deleteTask(ActionEvent actionEvent) {
@@ -179,7 +172,7 @@ public class HelloController {
     private void editTask(){
         if (selectedTask != null) {
             // Open edit task window
-            HelloApplication.openAddEditTaskWindow(selectedTask, this);
+            TaskManagerApplication.openAddEditTaskWindow(selectedTask, this);
 
         } else {
             showAlert("Error", "No task selected for editing.", Alert.AlertType.ERROR);
