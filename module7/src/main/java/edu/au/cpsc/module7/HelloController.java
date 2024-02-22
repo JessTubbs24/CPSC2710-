@@ -30,17 +30,10 @@ public class HelloController {
 
     @FXML
     private ListView<TaskModel> doneListView;
-    @FXML
-    private Label welcomeText;
-    @FXML
-    private TableView<TaskModel> tableView;
-    @FXML
-    private TableColumn<TaskModel, String> summaryColumn, descriptionColumn;
-    @FXML
-    private TableColumn<TaskModel, TaskModel.State> stateColumn;
     private ObservableList<TaskModel> todoTasks = FXCollections.observableArrayList();
     private ObservableList<TaskModel> doingTasks = FXCollections.observableArrayList();
     private ObservableList<TaskModel> doneTasks = FXCollections.observableArrayList();
+    private TaskModel selectedTask;
     public void initialize() {
 
         initializeListView(todoListView);
@@ -51,11 +44,25 @@ public class HelloController {
         todoListView.setItems(todoTasks);
         doingListView.setItems(doingTasks);
         doneListView.setItems(doneTasks);
+        // Make the ListView not focusable
+        todoListView.setFocusTraversable(false);
+        doingListView.setFocusTraversable(false);
+        doneListView.setFocusTraversable(false);
         // Add drag-and-drop functionality
         // Add drag-and-drop functionality to list views
         addDragAndDropFunctionality(todoListView);
         addDragAndDropFunctionality(doingListView);
         addDragAndDropFunctionality(doneListView);
+        // Listen for selection changes in all list views
+        todoListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            selectedTask = newValue;
+        });
+        doingListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            selectedTask = newValue;
+        });
+        doneListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            selectedTask = newValue;
+        });
     }
     private void initializeListView(ListView<TaskModel> listView) {
         listView.setCellFactory(param -> createTaskCardCellFactory(listView));
@@ -130,7 +137,6 @@ public class HelloController {
     }
 
     public void deleteTask(ActionEvent actionEvent) {
-        TaskModel selectedTask = tableView.getSelectionModel().getSelectedItem();
         if (selectedTask != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
@@ -155,6 +161,7 @@ public class HelloController {
                     }
                 }
             });
+            refreshListViews(selectedTask);
         } else {
             showAlert("Error", "No task selected for deletion.", Alert.AlertType.ERROR);
         }
@@ -170,12 +177,54 @@ public class HelloController {
         editTask();
     }
     private void editTask(){
-        TaskModel selectedTask = tableView.getSelectionModel().getSelectedItem();
         if (selectedTask != null) {
             // Open edit task window
             HelloApplication.openAddEditTaskWindow(selectedTask, this);
+
         } else {
             showAlert("Error", "No task selected for editing.", Alert.AlertType.ERROR);
+        }
+    }
+    // Helper method to get the list by task state
+    private ObservableList<TaskModel> getListByState(TaskModel.State state) {
+        switch (state) {
+            case TODO:
+                return todoTasks;
+            case DOING:
+                return doingTasks;
+            case DONE:
+                return doneTasks;
+            default:
+                return null;
+        }
+    }
+    public void refreshListViews(TaskModel editedTask) {
+        // Update the list view's items directly after editing the task
+        if (editedTask != null) {
+            // Check if the edited task is in any of the lists and update it accordingly
+            // Determine the original list of the edited task
+            ObservableList<TaskModel> originalList = null;
+            if (todoTasks.contains(editedTask)) {
+                originalList = todoTasks;
+            } else if (doingTasks.contains(editedTask)) {
+                originalList = doingTasks;
+            } else if (doneTasks.contains(editedTask)) {
+                originalList = doneTasks;
+            }
+
+            // Check if the edited task's status matches the list type
+            if (originalList != null && originalList != getListByState(editedTask.getState())) {
+                // Remove the edited task from its original list
+                originalList.remove(editedTask);
+
+                // Add the edited task to the correct list
+                getListByState(editedTask.getState()).add(editedTask);
+            }
+
+            // Refresh the list views to trigger an update
+            todoListView.refresh();
+            doingListView.refresh();
+            doneListView.refresh();
         }
     }
     private TaskModel draggedTask; // Class variable to store the dragged task
@@ -209,6 +258,8 @@ public class HelloController {
                     sourceList.remove(draggedTask); // Remove the dragged task from the source list
                     draggedTask.setState(getStateForListView(listView)); // Update the state based on the destination list
                     listView.getItems().add(draggedTask); // Add the dragged task to the destination list
+                    // Select the dropped item in the ListView
+                    listView.getSelectionModel().select(draggedTask);
                     success = true;
                 }
             }

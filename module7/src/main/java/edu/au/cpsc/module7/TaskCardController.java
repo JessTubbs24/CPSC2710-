@@ -5,6 +5,8 @@ import javafx.scene.control.Label;
 
 public class TaskCardController {
     @FXML
+    private Label descriptionLabel;
+    @FXML
     private Label summaryLabel;
 
     @FXML
@@ -24,6 +26,8 @@ public class TaskCardController {
     private void updateUI() {
         if (task != null) {
             summaryLabel.setText(task.getSummary());
+            descriptionLabel.setText(task.getDescription());
+
             stateLabel.setText(task.getState().toString()); // Set task state text
         }
     }

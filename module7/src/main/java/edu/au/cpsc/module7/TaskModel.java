@@ -3,6 +3,8 @@ package edu.au.cpsc.module7;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.util.Objects;
+
 public class TaskModel {
     private SimpleStringProperty summary;
     private SimpleObjectProperty<State> state;
@@ -49,7 +51,20 @@ public class TaskModel {
     public void setDescription(String description) {
         this.description.set(description);
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TaskModel task = (TaskModel) o;
+        return Objects.equals(summary, task.summary) &&
+                state == task.state &&
+                Objects.equals(description, task.description);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(summary, state, description);
+    }
     public enum State {
         TODO, DOING, DONE
     }

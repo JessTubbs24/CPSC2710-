@@ -52,6 +52,7 @@ public class CreateNewController {
             task.setState(statusComboBox.getValue());
             task.setDescription(descriptionTextArea.getText());
         }
+        mainController.refreshListViews(task);
         closeWindow();
     }
 

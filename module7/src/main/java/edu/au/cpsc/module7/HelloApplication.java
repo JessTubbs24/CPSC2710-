@@ -28,6 +28,7 @@ public class HelloApplication extends Application {
             stage.setScene(new Scene(root));
             stage.setTitle(task == null ? "Add Task" : "Edit Task");
             stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
