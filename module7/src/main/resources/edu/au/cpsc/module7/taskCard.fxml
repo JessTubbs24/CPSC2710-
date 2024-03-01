@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-
-<?import javafx.scene.layout.VBox?>
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="edu.au.cpsc.module7.TaskCardController"
-      spacing="5">
-<Label fx:id="summaryLabel" style="-fx-font-weight: bold;"/>
+<VBox spacing="5" stylesheets="@style/taskCard.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.au.cpsc.module7.TaskCardController">
+<Label fx:id="summaryLabel" style="-fx-font-weight: bold;" />
 <HBox>
-    <Label fx:id="stateLabel" style="-fx-font-size: smaller;"/>
-    <Label fx:id="descriptionLabel"/>
+    <Label fx:id="stateLabel" style="-fx-font-size: smaller;" />
+    <Label fx:id="descriptionLabel" />
 </HBox>
 </VBox>

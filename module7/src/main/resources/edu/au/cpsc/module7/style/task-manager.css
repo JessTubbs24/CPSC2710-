@@ -1,0 +1,35 @@
+.root {
+    -fx-font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+    -fx-base: #A89B91; /* Soft beige */
+}
+
+.button {
+    -fx-background-color: #D8C3A5, linear-gradient(#EAE0D5, #D8C3A5);
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 5px;
+    -fx-padding: 6px 12px;
+    -fx-text-fill: #333;
+}
+
+.button:hover {
+    -fx-background-color: #EAE0D5;
+}
+
+.label {
+    -fx-text-fill: #5E503F;
+    -fx-font-size: 15px;
+}
+
+.list-view {
+    -fx-background-color: #FFF0E6;
+    -fx-border-color: #C9B7A5;
+    -fx-border-radius: 4px;
+}
+
+.list-cell:even {
+    -fx-background-color: #F3E4D2;
+}
+
+.list-cell:odd {
+    -fx-background-color: #EAD3BF;
+}

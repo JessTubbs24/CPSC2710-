@@ -29,7 +29,6 @@ public class TaskManagerApplication extends Application {
             public void handle(KeyEvent t) {
                 if(t.getCode()== KeyCode.ESCAPE)
                 {
-                    System.out.println("click on escape");
                     Stage sb = (Stage)scene.getWindow();//use any one object
                     sb.close();
                 }

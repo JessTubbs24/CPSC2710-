@@ -1,0 +1,24 @@
+.root {
+    -fx-background-color: #F3E4D2;
+    -fx-padding: 10px;
+    -fx-border-color: #C9B7A5;
+    -fx-border-radius: 5px;
+}
+
+.label {
+    -fx-text-fill: #5E503F;
+}
+
+#summaryLabel {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+#stateLabel, #descriptionLabel {
+    -fx-font-size: 12px;
+    -fx-padding: 5px;
+}
+
+#stateLabel {
+    -fx-font-style: italic;
+}

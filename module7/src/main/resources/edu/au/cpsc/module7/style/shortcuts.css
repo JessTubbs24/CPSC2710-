@@ -1,0 +1,14 @@
+.root {
+    -fx-background-color: #F3E4D2;
+}
+
+.label {
+    -fx-text-fill: #5E503F;
+    -fx-font-size: 16px;
+}
+
+.label[font-size="40.0"] {
+    -fx-font-size: 40px;
+    -fx-text-fill: #A89B91;
+    -fx-font-weight: bold;
+}
