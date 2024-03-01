@@ -28,7 +28,7 @@ public class TaskCardController {
             summaryLabel.setText(task.getSummary());
             descriptionLabel.setText(task.getDescription());
 
-            stateLabel.setText(task.getState().toString()); // Set task state text
+            stateLabel.setText(task.getState().toString());
         }
     }
 }

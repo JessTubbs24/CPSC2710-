@@ -29,7 +29,7 @@ public class TaskManagerApplication extends Application {
             public void handle(KeyEvent t) {
                 if(t.getCode()== KeyCode.ESCAPE)
                 {
-                    Stage sb = (Stage)scene.getWindow();//use any one object
+                    Stage sb = (Stage)scene.getWindow();
                     sb.close();
                 }
             }

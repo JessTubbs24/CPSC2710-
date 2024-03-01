@@ -60,12 +60,12 @@ public class TaskManagerController {
         listView.setCellFactory(param -> createTaskCardCellFactory(listView));
     }
     public void setTasks(ObservableList<TaskModel> tasks) {
-        // Clear existing tasks
+
         todoTasks.clear();
         doingTasks.clear();
         doneTasks.clear();
 
-        // Add tasks to appropriate lists based on their state
+
         for (TaskModel task : tasks) {
             switch (task.getState()) {
                 case TODO:
@@ -80,7 +80,7 @@ public class TaskManagerController {
             }
         }
 
-        // Listen for changes in tasks and update lists accordingly
+
         tasks.addListener((ListChangeListener<TaskModel>) c -> {
             while (c.next()) {
                 if (c.wasAdded()) {
@@ -120,7 +120,7 @@ public class TaskManagerController {
                     doneTasks.add(task);
                     break;
                 default:
-                    // Handle unknown state or provide default behavior
+
                     break;
             }
     }
@@ -148,7 +148,7 @@ public class TaskManagerController {
                             doneTasks.remove(selectedTask);
                             break;
                         default:
-                            // Handle unknown state or provide default behavior
+
                             break;
                     }
                 }
@@ -170,14 +170,14 @@ public class TaskManagerController {
     }
     private void editTask(){
         if (selectedTask != null) {
-            // Open edit task window
+
             TaskManagerApplication.openAddEditTaskWindow(selectedTask, this);
 
         } else {
             showAlert("Error", "No task selected for editing.", Alert.AlertType.ERROR);
         }
     }
-    // Helper method to get the list by task state
+
     private ObservableList<TaskModel> getListByState(TaskModel.State state) {
         switch (state) {
             case TODO:
@@ -191,10 +191,9 @@ public class TaskManagerController {
         }
     }
     public void refreshListViews(TaskModel editedTask) {
-        // Update the list view's items directly after editing the task
+
         if (editedTask != null) {
-            // Check if the edited task is in any of the lists and update it accordingly
-            // Determine the original list of the edited task
+
             ObservableList<TaskModel> originalList = null;
             if (todoTasks.contains(editedTask)) {
                 originalList = todoTasks;
@@ -204,22 +203,20 @@ public class TaskManagerController {
                 originalList = doneTasks;
             }
 
-            // Check if the edited task's status matches the list type
+
             if (originalList != null && originalList != getListByState(editedTask.getState())) {
-                // Remove the edited task from its original list
                 originalList.remove(editedTask);
 
-                // Add the edited task to the correct list
                 getListByState(editedTask.getState()).add(editedTask);
             }
 
-            // Refresh the list views to trigger an update
+
             todoListView.refresh();
             doingListView.refresh();
             doneListView.refresh();
         }
     }
-    private TaskModel draggedTask; // Class variable to store the dragged task
+    private TaskModel draggedTask;
 
     private void addDragAndDropFunctionality(ListView<TaskModel> listView) {
         listView.setOnDragDetected(event -> {
@@ -268,7 +265,7 @@ public class TaskManagerController {
             case DONE:
                 return doneTasks;
             default:
-                return null; // Handle unknown state or provide default behavior
+                return null;
         }
     }
     private TaskModel.State getStateForListView(ListView<TaskModel> listView) {
@@ -279,7 +276,6 @@ public class TaskManagerController {
         } else if (listView == doneListView) {
             return TaskModel.State.DONE;
         } else {
-            // Handle unknown state or provide default behavior
             return null;
         }
     }
@@ -306,7 +302,7 @@ public class TaskManagerController {
                         TaskCardController controller = loader.getController();
                         controller.setTask(task);
                     } catch (IOException e) {
-                        e.printStackTrace(); // Handle the exception appropriately
+                        e.printStackTrace();
                     }
                     setGraphic(card);
                 }

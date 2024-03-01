@@ -23,12 +23,12 @@ Shortcuts Window: Open the shortcuts window from the main menu to learn about ke
 # Drag and Drop Feature
 After a task is created, you are able to drag the card from one state to another, in any direction.   
 For example, if a task is sitting in the TODO state, you can drag it over to the DOING state once started.  
-Another example being that a task was assumed to be DONE but there is more to the task than expected, the task can be dragged back into the DOING state.  
+Another example being that if a task was assumed to be DONE but there is more to the task than expected, the task can be dragged back into the DOING state.  
 
 
 # Desired, but not yet implemented.
 The escape button shortcut is implemented, but the enter and delete shortcuts are not yet implemented.  
 User assignment per task would be a great implementation to ensure there aren't multiple people working on one task.  
-Priority level per task would also be great. Seeing what is top priority would allow task that are MOST important to be complete before tasks with a lower priority.   
-Login authentication so that, instead of seeing the whole teams tasks, users can only see what tasks are assigned to them.
+Priority level per task would also be great. Seeing what is top priority would allow tasks that are MOST important to be completed before tasks with a lower priority.   
+Login authentication so that, instead of seeing the whole team's tasks, users can only see the tasks that are assigned to them.
 
