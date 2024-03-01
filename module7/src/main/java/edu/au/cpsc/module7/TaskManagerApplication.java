@@ -1,21 +1,40 @@
 package edu.au.cpsc.module7;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.scene.control.MenuBar;
 
 import java.io.IOException;
 
 public class TaskManagerApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        MenuBar menuBar = new MenuBar();
         FXMLLoader fxmlLoader = new FXMLLoader(TaskManagerApplication.class.getResource("task-manager.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Task Manager!");
         stage.setScene(scene);
         stage.show();
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>
+                () {
+
+            @Override
+            public void handle(KeyEvent t) {
+                if(t.getCode()== KeyCode.ESCAPE)
+                {
+                    System.out.println("click on escape");
+                    Stage sb = (Stage)scene.getWindow();//use any one object
+                    sb.close();
+                }
+            }
+        });
     }
     public static void openAddEditTaskWindow(TaskModel task, TaskManagerController controller) {
         Stage stage = new Stage();
@@ -31,6 +50,23 @@ public class TaskManagerApplication extends Application {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void openShortCutsWindow(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(TaskManagerApplication.class.getResource("shortcuts.fxml"));
+            /*
+             * if "fx:controller" is not set in fxml
+             * fxmlLoader.setController(NewWindowController);
+             */
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Shortcuts Window");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
         }
     }
     public static void main(String[] args) {

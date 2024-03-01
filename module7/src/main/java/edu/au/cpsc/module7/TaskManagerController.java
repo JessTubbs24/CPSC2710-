@@ -7,10 +7,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -313,5 +312,9 @@ public class TaskManagerController {
                 }
             }
         };
+    }
+
+    public void showShortcuts(ActionEvent actionEvent) {
+        TaskManagerApplication.openShortCutsWindow();
     }
 }
